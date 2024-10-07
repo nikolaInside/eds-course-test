@@ -21,9 +21,8 @@ jobs:
 
       - name: Set environment variables globally
         run: |
-          echo "API_URL=${{ secrets.API_URL }}" >> $GITHUB_ENV
-          echo "API_BASE=${{ secrets.API_BASE }}" >> $GITHUB_ENV
-          echo "API_KEY=${{ secrets.API_KEY }}" >> $GITHUB_ENV
+          echo "process.env.APIURL=${{ secrets.APIURL }}" >> $GITHUB_ENV
+          echo "process.env.APISECRET=${{ secrets.APISECRET }}" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: npm install

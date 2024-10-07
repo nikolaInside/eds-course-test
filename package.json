@@ -35,6 +35,8 @@
     "stylelint-config-standard": "36.0.0"
   },
   "dependencies": {
-    "crosswalk-converter": "github:buuhuu/crosswalk-converter"
+    "cross-env": "^7.0.3",
+    "crosswalk-converter": "github:buuhuu/crosswalk-converter",
+    "dotenv": "^16.4.5"
   }
 }

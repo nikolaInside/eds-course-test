@@ -14,6 +14,7 @@ const path = require('path');
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const ZipPlugin = require('zip-webpack-plugin');
+const dotenv = require('dotenv').config({ path: `${__dirname}/.env` });
 
 const DEFAULT_CONFIG = {
   target: 'node',
@@ -52,7 +53,13 @@ const DEFAULT_CONFIG = {
       decodeHtmlEntities: ['html-entities', 'decode'],
       fetch: ['node-fetch', 'default'],
     }),
-    new webpack.DefinePlugin({ window: null }),
+    new webpack.DefinePlugin({
+      window: null,
+    }),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(dotenv.parsed),
+      'process.env.JOBTEASER_APIURL': JSON.stringify('whatever'),
+    }),
     // for those jsdom dependencies we want to throw a missing module error if they would be used
     // on the execution path
     new webpack.IgnorePlugin({ resourceRegExp: /^canvas/ }),
@@ -112,6 +119,7 @@ module.exports = (env, { mode = 'development' }) => {
   return {
     ...DEFAULT_CONFIG,
     output,
+    dotenv,
     plugins,
     mode,
     devtool,
